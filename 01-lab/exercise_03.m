@@ -1,21 +1,42 @@
-clc, clear
+%% clearing old values, closing figures
+clc; clear; close all;
 
-% solving differential equation
+%% solving the differential equation
 syms y(x);
 equation = diff(y, x) - y/x == x * exp(x);
 solution = dsolve(equation);
-
-disp("General differential equation solution");
-disp(solution)
 
 % solving Cauchy condition
 syms C1;
 cauchy_y = 0;
 cauchy_x = 1;
 
-cauchy_condition = subs(solution, 'x', cauchy_x) == cauchy_y;
-C1 = solve(cauchy_condition, C1);
-cauchy_condition_solution = subs(solution, 'C1', C1);
+cauchy_condition = subs(solution, x, cauchy_x) == cauchy_y;
+C1_value = solve(cauchy_condition, C1);
+cauchy_condition_func = subs(solution, "C1", C1_value);
 
-disp("Cauchy condition solution");
-disp(cauchy_condition_solution);
+%% plotting
+f = matlabFunction(cauchy_condition_func);
+
+% preparation
+figure(1)
+axis equal; hold on;
+
+xline(0); hold on;
+yline(0); hold on;
+
+xlim([-1 2]);
+ylim([-1 2]);
+
+grid on;
+
+% plotting graph
+graph = fplot(f); hold on;
+graph.LineWidth = 1.5;
+
+% plotting Cauchy point
+point = plot(cauchy_x, cauchy_y, "."); hold on;
+point.MarkerSize = 10;
+point.Color = "#622f75";
+
+datatip(point);
