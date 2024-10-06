@@ -1,5 +1,6 @@
 %% clearing old values, closing figures
 clc, clear, close all
+addpath('utils');
 
 %% solving differential equation
 syms y(x);
@@ -14,18 +15,9 @@ f2 = matlabFunction(solution(2));
 f3 = matlabFunction(solution(3));
 
 figure(1)
-axis equal; hold on;
+plot_prep([-10 30], [-15 15]);
 
-xline(0, 'HandleVisibility', 'off'); hold on;
-yline(0, 'HandleVisibility', 'off'); hold on;
-
-xlim([-10 30]);
-ylim([-15 15]);
-
-grid on;
-legend();
-
-% plotting graph of MATLAB solution
+%% plotting graph of MATLAB solution
 C_values = (-1:2);
 func_num = length(C_values);
 colors = lines(func_num);
@@ -52,19 +44,10 @@ fp1 = @(C, x) (x/2) .* sqrt(2 ./ (log(abs(x)) - C));
 fp2 = @(C,x) -(x/2) .* sqrt(2 ./ (log(abs(x)) - C));
 fp3 = 0;
 
-figure(2)
-axis equal; hold on;
+figure(2);
+plot_prep([-50 500], [-200 200]);
 
-xline(0, 'HandleVisibility', 'off'); hold on;
-yline(0, 'HandleVisibility', 'off'); hold on;
-
-xlim([-50 500]);
-ylim([-200 200]);
-
-grid on;
-legend();
-
-% plotting graph of MATLAB solution
+%% plotting graph of on-paper solution
 C_values = (-1:2);
 func_num = length(C_values);
 colors = lines(func_num);

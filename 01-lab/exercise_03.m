@@ -20,23 +20,17 @@ f = matlabFunction(cauchy_condition_func);
 
 % preparation
 figure(1)
-axis equal; hold on;
-
-xline(0); hold on;
-yline(0); hold on;
-
-xlim([-1 2]);
-ylim([-1 2]);
-
-grid on;
+plot_prep([-1 2], [-1 2]);
 
 % plotting graph
 graph = fplot(f); hold on;
 graph.LineWidth = 1.5;
+graph.DisplayName = "Koši sprendinys";
 
 % plotting Cauchy point
 point = plot(cauchy_x, cauchy_y, "."); hold on;
 point.MarkerSize = 10;
 point.Color = "#622f75";
+point.DisplayName = "Koši uždavinio taškas";
 
 datatip(point);
