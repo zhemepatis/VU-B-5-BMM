@@ -1,40 +1,47 @@
+%% clearing old values, closing figures
 clc, clear, close all
 
-% solving differential equation
+%% solving differential equation
 syms y(x);
 equation = x * diff(y, x) == y - y^3/x^2;
 solution = dsolve(equation);
 
 disp(solution);
 
-% preparing to plot graphs
-f1 = matlabFunction(solution(1))
-x_values = 7:0.001:1000;
-C1 = 2;
-
-y_values = f1(C1, x_values);
-y_real = real(y_values);
-y_imag = imag(y_values);
-
 %% plotting
+f1 = matlabFunction(solution(1));
+f2 = matlabFunction(solution(2));
+f3 = matlabFunction(solution(3));
+
+% preparation
 figure(1)
+axis equal; hold on;
 
-% plotting axes
-% xline(0); hold on; 
-% yline(0); hold on;
+xline(0, 'HandleVisibility', 'off'); hold on;
+yline(0, 'HandleVisibility', 'off'); hold on;
 
-% xlabel('x');
-% ylabel('y');
+xlim([-50 500]);
+ylim([-200 200]);
 
-% grid on; hold on;
+grid on;
 
-% %% plotting graphs
-% graph = plot(x_values, y_real);
-% graph.Color = '#07bdfa';
-% graph.LineStyle = '-';
-% graph.LineWidth = 1.8;
+% plotting graph of MATLAB solution
+colors = lines(5);
 
-% graph = plot(x_values, y_imag);
-% graph.Color = 'red';
-% graph.LineStyle = '-';
-% graph.LineWidth = 1;
+for C_value = (1:4)
+    x_values = ((exp(C_value) + 0.1):0.1:1000);
+
+    graph = plot(x_values, f1(C_value, x_values)); hold on;
+    graph.Color = colors(C_value, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.DisplayName = "y(x), C_1 = " + num2str(C_value);
+
+    graph = plot(x_values, f2(C_value, x_values)); hold on;
+    graph.Color = colors(C_value, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.HandleVisibility = 'off';
+end
+
+legend('show');
