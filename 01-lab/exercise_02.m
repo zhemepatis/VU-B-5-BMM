@@ -8,13 +8,51 @@ solution = dsolve(equation);
 
 disp(solution);
 
-%% plotting
+%% preparation for plotting
 f1 = matlabFunction(solution(1));
 f2 = matlabFunction(solution(2));
 f3 = matlabFunction(solution(3));
 
-% preparation
 figure(1)
+axis equal; hold on;
+
+xline(0, 'HandleVisibility', 'off'); hold on;
+yline(0, 'HandleVisibility', 'off'); hold on;
+
+xlim([-10 30]);
+ylim([-15 15]);
+
+grid on;
+legend();
+
+% plotting graph of MATLAB solution
+C_values = (-1:2);
+func_num = length(C_values);
+colors = lines(func_num);
+
+for i = (1:func_num)
+    C_value = C_values(i);
+    x_values = ((exp(C_value) + 0.1):0.1:1000);
+
+    graph = plot(x_values, f1(C_value, x_values)); hold on;
+    graph.Color = colors(i, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.DisplayName = "y(x), C_1 = " + num2str(C_value);
+
+    graph = plot(x_values, f2(C_value, x_values)); hold on;
+    graph.Color = colors(i, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.HandleVisibility = 'off';
+end
+
+% preparation
+fp1 = @(C, x) (x/2) .* sqrt(2 ./ (log(abs(x)) - C));
+fp2 = @(C,x) -(x/2) .* sqrt(2 ./ (log(abs(x)) - C));
+fp3 = 0;
+
+figure(2)
 axis equal; hold on;
 
 xline(0, 'HandleVisibility', 'off'); hold on;
@@ -24,24 +62,39 @@ xlim([-50 500]);
 ylim([-200 200]);
 
 grid on;
+legend();
 
 % plotting graph of MATLAB solution
-colors = lines(5);
+C_values = (-1:2);
+func_num = length(C_values);
+colors = lines(func_num);
 
-for C_value = (1:4)
-    x_values = ((exp(C_value) + 0.1):0.1:1000);
+for i = (1:func_num)
+    C_value = C_values(i);
+    l_end = (-exp(C_value) - 500):0.1:(-exp(C_value) - 0.1);
+    r_end = (exp(C_value) + 0.1):0.1:(exp(C_value) + 500);
 
-    graph = plot(x_values, f1(C_value, x_values)); hold on;
-    graph.Color = colors(C_value, :);
+    graph = plot(l_end, fp1(C_value, l_end)); hold on;
+    graph.Color = colors(i, :);
     graph.LineStyle = '-';
     graph.LineWidth = 1.8;
     graph.DisplayName = "y(x), C_1 = " + num2str(C_value);
 
-    graph = plot(x_values, f2(C_value, x_values)); hold on;
-    graph.Color = colors(C_value, :);
+    graph = plot(r_end, fp1(C_value, r_end)); hold on;
+    graph.Color = colors(i, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.HandleVisibility = 'off';
+
+    graph = plot(l_end, fp2(C_value, l_end)); hold on;
+    graph.Color = colors(i, :);
+    graph.LineStyle = '-';
+    graph.LineWidth = 1.8;
+    graph.HandleVisibility = 'off';
+
+    graph = plot(r_end, fp2(C_value, r_end)); hold on;
+    graph.Color = colors(i, :);
     graph.LineStyle = '-';
     graph.LineWidth = 1.8;
     graph.HandleVisibility = 'off';
 end
-
-legend('show');
