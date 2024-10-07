@@ -1,8 +1,7 @@
-clc, clear
+%% clearing old values, closing figures
+clc, clear, close all
+addpath('utils');
 
-syms y(x);
-equation = x*sqrt(3 + y^2) + 2*y*sqrt(1 + x^2)*diff(y, x) == 0;
-solution = dsolve(equation);
-
-l_sol = latex(solution(1));
-disp(l_sol)
+syms y(x)
+equation = diff(y, x) == -(x * sqrt(3 + y^2)) / (2 * y * sqrt(1 + x^2));
+solution = dsolve(equation)

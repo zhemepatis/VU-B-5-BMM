@@ -15,9 +15,8 @@ f2 = matlabFunction(solution(2));
 f3 = matlabFunction(solution(3));
 
 figure(1)
-plot_prep([-10 30], [-15 15]);
+plot_prep([-25 25], [-20 20]);
 
-%% plotting graph of MATLAB solution
 C_values = (-1:2);
 func_num = length(C_values);
 colors = lines(func_num);
@@ -39,15 +38,20 @@ for i = (1:func_num)
     graph.HandleVisibility = 'off';
 end
 
-% preparation
+graph = fplot(f3()); hold on;
+graph.Color = [0, 0, 0];
+graph.LineStyle = '-';
+graph.LineWidth = 1.8;
+graph.DisplayName = "y = 0";
+
+%% plotting graph of on-paper solution
 fp1 = @(C, x) (x/2) .* sqrt(2 ./ (log(abs(x)) - C));
 fp2 = @(C,x) -(x/2) .* sqrt(2 ./ (log(abs(x)) - C));
 fp3 = 0;
 
 figure(2);
-plot_prep([-50 500], [-200 200]);
+plot_prep([-25 25], [-20 20]);
 
-%% plotting graph of on-paper solution
 C_values = (-1:2);
 func_num = length(C_values);
 colors = lines(func_num);
@@ -81,3 +85,10 @@ for i = (1:func_num)
     graph.LineWidth = 1.8;
     graph.HandleVisibility = 'off';
 end
+
+graph = fplot(fp3()); hold on;
+graph.Color = [0, 0, 0];
+graph.LineStyle = '-';
+graph.LineWidth = 1.8;
+graph.DisplayName = "y = 0";
+
