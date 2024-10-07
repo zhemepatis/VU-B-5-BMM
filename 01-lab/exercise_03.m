@@ -4,7 +4,7 @@ clc; clear; close all;
 %% solving the differential equation
 syms y(x);
 equation = diff(y, x) - y/x == x * exp(x);
-solution = dsolve(equation);
+solution = dsolve(equation)
 
 % solving Cauchy condition
 syms C1;

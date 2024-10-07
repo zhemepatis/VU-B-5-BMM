@@ -5,9 +5,7 @@ addpath('utils');
 %% solving differential equation
 syms y(x);
 equation = x * diff(y, x) == y - y^3/x^2;
-solution = dsolve(equation);
-
-disp(solution);
+solution = dsolve(equation)
 
 %% preparation for plotting
 f1 = matlabFunction(solution(1));
