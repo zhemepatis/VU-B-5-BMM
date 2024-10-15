@@ -17,7 +17,7 @@ rk_2o_results2 = runge_kutta_2o_method(f, 0.05, 1);
 
 %% plotting
 figure(1);
-plot_prep([-2.5, 2.5], [0, 5]);
+plot_prep([-1, 2.5], [0.75, 4.25]);
 hold on;
 
 % plotting ode45 results
@@ -28,21 +28,25 @@ graph.LineWidth = 1.8;
 % plotting 2nd order Runge-Kutta method results
 t_values = rk_2o_results1(1, :);
 y_values = rk_2o_results1(2, :);
-
-graph = scatter(t_values, y_values);
-graph.Marker = 'square';
-graph.MarkerFaceColor = 'y';
 y_2tau = y_values(end); % saving for error evaluation
+
+graph = scatter(t_values, y_values, 60);
+graph.Marker = 'square';
+graph.MarkerFaceColor = '#e5c5c5';
+graph.MarkerEdgeColor = '#A0526D';
 
 t_values = rk_2o_results2(1, :);
 y_values = rk_2o_results2(2, :);
 y_tau = y_values(end); % saving for error evaluation
 
-graph = scatter(t_values, y_values);
-graph.Marker = '.';
-graph.MarkerFaceColor = 'r';
+graph = scatter(t_values, y_values, 40);
+graph.LineWidth = 1.5;
+graph.Marker = 'x';
+graph.MarkerEdgeColor = '#4B0082';
+
 
 hold off;
 
 %% evaluating approximation
-error = runge_approx(y_2tau, y_tau, 4)
+error = runge_approx(y_2tau, y_tau, 4);
+disp("error = " + num2str(error))
