@@ -30,12 +30,19 @@ t_values = rk_2o_results1(1, :);
 y_values = rk_2o_results1(2, :);
 
 graph = scatter(t_values, y_values);
-graph.Marker = 'x';
+graph.Marker = 'square';
+graph.MarkerFaceColor = 'y';
+y_2tau = y_values(end); % saving for error evaluation
 
 t_values = rk_2o_results2(1, :);
 y_values = rk_2o_results2(2, :);
+y_tau = y_values(end); % saving for error evaluation
 
 graph = scatter(t_values, y_values);
-graph.Marker = 'square';
+graph.Marker = '.';
+graph.MarkerFaceColor = 'r';
 
 hold off;
+
+%% evaluating approximation
+error = runge_approx(y_2tau, y_tau, 4)

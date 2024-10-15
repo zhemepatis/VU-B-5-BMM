@@ -28,14 +28,19 @@ graph.LineWidth = 1.8;
 % plotting Runge-Kutta method results
 t_values = rk_results1(1, :);
 y_values = rk_results1(2, :);
+y_2tau = y_values(end); % saving for error evaluation
 
 graph = scatter(t_values, y_values);
 graph.Marker = 'x';
 
 t_values = rk_results2(1, :);
 y_values = rk_results2(2, :);
+y_tau = y_values(end); % saving for error evaluation
 
 graph = scatter(t_values, y_values);
 graph.Marker = 'square';
 
 hold off;
+
+%% evaluating approximation
+error = runge_approx(y_2tau, y_tau, 4);
