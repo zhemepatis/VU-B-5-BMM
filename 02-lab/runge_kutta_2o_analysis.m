@@ -1,7 +1,7 @@
 %% clearing old values, closing figures
 clc, clear, close all
 addpath('../utils');
-addpath('algorithms');
+addpath('numerical-methods/');
 
 % defining function
 f = @(t, u) exp(t) .* log(2 .* u + t) + t;
