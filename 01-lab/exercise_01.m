@@ -1,6 +1,6 @@
 %% clearing old values, closing figures
 clc, clear, close all
-addpath('utils');
+addpath('../utils');
 
 syms y(x) C
 equation = x * sqrt(3+y^2) * diff(x) + 2 * y * sqrt(1+x^2) * diff(y(x)) == 0;

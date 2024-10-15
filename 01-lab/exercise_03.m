@@ -1,5 +1,6 @@
 %% clearing old values, closing figures
 clc; clear; close all;
+addpath('../utils');
 
 %% solving the differential equation
 syms y(x);
