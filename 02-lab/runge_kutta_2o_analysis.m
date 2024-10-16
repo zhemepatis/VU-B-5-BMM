@@ -18,6 +18,9 @@ rk_2o_results2 = runge_kutta_2o_method(f, 0.05, 1);
 %% plotting
 figure(1);
 plot_prep([-1, 2.5], [0.75, 4.25]);
+xlabel('t');
+ylabel('u');
+
 hold on;
 
 % plotting ode45 results
