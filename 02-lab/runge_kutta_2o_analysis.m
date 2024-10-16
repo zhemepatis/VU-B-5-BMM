@@ -24,6 +24,7 @@ hold on;
 graph = plot(ode45_results.x, ode45_results.y);
 graph.LineStyle = '-';
 graph.LineWidth = 1.8;
+graph.DisplayName = "u(t), ode45()";
 
 % plotting 2nd order Runge-Kutta method results
 t_values = rk_2o_results1(1, :);
@@ -34,6 +35,7 @@ graph = scatter(t_values, y_values, 60);
 graph.Marker = 'square';
 graph.MarkerFaceColor = '#e5c5c5';
 graph.MarkerEdgeColor = '#A0526D';
+graph.DisplayName = "u(t), \tau = 0.1";
 
 t_values = rk_2o_results2(1, :);
 y_values = rk_2o_results2(2, :);
@@ -43,7 +45,7 @@ graph = scatter(t_values, y_values, 40);
 graph.LineWidth = 1.5;
 graph.Marker = 'x';
 graph.MarkerEdgeColor = '#4B0082';
-
+graph.DisplayName = "u(t), \tau = 0.05";
 
 hold off;
 
