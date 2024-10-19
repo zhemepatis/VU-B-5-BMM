@@ -1,8 +1,8 @@
-function results = runge_kutta_method(f, tau, T)
+function results = runge_kutta_method(f, initial_point, tau, T)
     iter_num = T / tau - 1;
 
-    t_n = 0;
-    y_n = 1;
+    t_n = initial_point(1);
+    y_n = initial_point(2);
 
     t_val = [t_n];
     y_val = [y_n];

@@ -6,14 +6,14 @@ addpath('numerical-methods/');
 % defining function
 f = @(t, u) exp(t) .* log(2 .* u + t) + t;
 t_span = [0, 1];
-initial_condition = 1; % u(0) = 1
+initial_point = [0, 1]; % u(0) = 1
 
 % solving differential equation using standard MATLAB methods
-ode45_results = ode45(f, t_span, initial_condition);
+ode45_results = ode45(f, t_span, initial_point(2));
 
 % solving differential equation using Runge-Kutta method
-rk_results1 = runge_kutta_method(f, 0.1, 1);
-rk_results2 = runge_kutta_method(f, 0.05, 1);
+rk_results1 = runge_kutta_method(f, initial_point, 0.1, 1);
+rk_results2 = runge_kutta_method(f, initial_point, 0.05, 1);
 
 %% plotting
 figure(1);
