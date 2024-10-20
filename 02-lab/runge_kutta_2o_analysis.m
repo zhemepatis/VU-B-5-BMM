@@ -53,5 +53,5 @@ graph.DisplayName = "u(t), \tau = 0.05";
 hold off;
 
 %% evaluating approximation
-error = runge_approx(y_2tau, y_tau, 4);
+error = runge_approx(y_2tau, y_tau, 2);
 disp("error = " + num2str(error))
